@@ -1,24 +1,45 @@
-
-import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Loader } from "lucide-react";
-import SearchResults from '@/components/SearchResults';
-
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [results, setResults] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     
-    // Simulate API call with timeout
-    setTimeout(() => {
-      setLoading(false);
+    if (!searchQuery.trim()) {
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch('https://monitorul-app-170439696946.europe-west1.run.app/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          keyword: searchQuery.trim()
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setResults(data);
       setShowResults(true);
-    }, 1500);
+    } catch (err) {
+      console.error('Search error:', err);
+      setError('A apărut o eroare la căutare. Vă rugăm să încercați din nou.');
+      setShowResults(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,7 +84,7 @@ const Index = () => {
               <Button 
                 type="submit"
                 className="rounded-l-none rounded-r-full px-6 bg-blue-500 hover:bg-blue-600 text-white font-medium"
-                disabled={loading}
+                disabled={loading || !searchQuery.trim()}
               >
                 {loading ? (
                   <Loader className="h-5 w-5 animate-spin" />
@@ -73,13 +94,18 @@ const Index = () => {
               </Button>
             </div>
           </form>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-700 text-sm">{error}</p>
+            </div>
+          )}
         </div>
 
         {/* Search Results */}
-        {showResults && <SearchResults />}
+        {showResults && results && <SearchResults results={results} />}
       </main>
     </div>
   );
 };
-
-export default Index;
