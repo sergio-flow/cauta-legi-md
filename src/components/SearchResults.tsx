@@ -86,8 +86,8 @@ const SearchResults = () => {
               </div>
             </div>
             
-            <div className="flex-1 pr-[30px]">
-              <p className="text-sm md:text-base text-gray-800 pr-16">
+            <div className="flex-1 pr-[100px]">
+              <p className="text-sm md:text-base text-gray-800">
                 {result.title}
               </p>
             </div>
