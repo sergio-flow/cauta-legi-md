@@ -41,6 +41,13 @@ const SearchResults = ({ results }: SearchResultsProps) => {
             key={index}
             className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-150 relative"
           >
+             <div className="flex-shrink-0 mr-4">
+              <div className="flex flex-col items-center">
+                <span className="text-lg font-semibold text-blue-600">{result.relevance}</span>
+                <span className="text-xs text-gray-500">Relevanța</span>
+              </div>
+            </div>
+            
             <div className={`${result.url ? 'pr-20' : ''}`}>
               <h5 className="text-lg font-semibold text-gray-900 mb-1">
                 {result.title}
