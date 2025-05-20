@@ -46,7 +46,7 @@ const SearchResults = ({ results }: SearchResultsProps) => {
                 {result.title}
 
                  <span className="text-blue-600 text-sm font-semibold">
-                  {result.relevance}
+                  {result.relevance || "0%"}
                 </span>
                 <span className="text-xs text-gray-500">Relevanța</span>
               </h5>
