@@ -36,7 +36,7 @@ const Index = () => {
         
         <div className="flex flex-col items-center">
           <img 
-            src="https://www.legis.md/assets/img/logo-stema3.png" 
+            src="https://www.legis.md/assets/img/logo-stema.png" 
             alt="Stema Republicii Moldova" 
             className="h-16 w-auto"
           />
