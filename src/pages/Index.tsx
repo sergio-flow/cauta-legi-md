@@ -23,7 +23,7 @@ const Index = () => {
     setError(null);
     
     try {
-      const response = await fetch('https://monitorul-app-170439696946.europe-west1.run.app/query', {
+      const response = await fetch('https://corsproxy.io?url=https://monitorul-app-170439696946.europe-west1.run.app/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
