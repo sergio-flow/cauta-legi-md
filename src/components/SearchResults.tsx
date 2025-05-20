@@ -86,10 +86,7 @@ const SearchResults = () => {
               </div>
             </div>
             
-            <div 
-              className="flex-1 cursor-pointer"
-              onClick={() => window.open('https://monitorul.gov.md/ro/monitorul/view/pdf/3084', '_blank')}
-            >
+            <div className="flex-1 pr-[30px]">
               <p className="text-sm md:text-base text-gray-800 pr-16">
                 {result.title}
               </p>
