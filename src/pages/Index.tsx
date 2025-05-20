@@ -1,3 +1,10 @@
+
+import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Loader } from "lucide-react";
+import SearchResults from '@/components/SearchResults';
+
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -109,3 +116,5 @@ const Index = () => {
     </div>
   );
 };
+
+export default Index;
